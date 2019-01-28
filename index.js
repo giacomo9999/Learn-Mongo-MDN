@@ -27,3 +27,26 @@ const storySchema = Schema({
 
 const Story = mongoose.model("Story", storySchema);
 const Author = mongoose.model("Author", authorSchema);
+
+const bob = new Author({ name: "Bob Smith" });
+
+bob.save(err => {
+  console.log("Saving.")
+  if (err) return handleError(err);
+});
+
+const story = new Story({
+  title: "Bob Goes Sledding",
+  author: bob._id
+});
+
+story.save(err => {
+  if (err) return handleError(err);
+});
+
+Story.findOne({ title: "Bob Goes Sledding" })
+  .populate("author")
+  .exec((err, story) => {
+    if (err) return handleErr(err);
+    console.log("The author is ", story.author.name);
+  });
