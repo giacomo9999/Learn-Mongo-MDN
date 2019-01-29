@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "async": "^2.6.1",
     "mongoose": "^5.4.7"
   },
   "devDependencies": {},
